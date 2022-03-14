@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +14,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MyStore.Data;
 using MyStore.Domain.Entities;
+using MyStore.Infrastructure;
+using MyStore.Service;
 using MyStore.Services;
 
 namespace MyStore
@@ -30,8 +33,9 @@ namespace MyStore
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
-            
+            services.AddControllers().AddJsonOptions(x =>
+             x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyStore", Version = "v1" });
@@ -39,6 +43,10 @@ namespace MyStore
 
             services.AddDbContext<StoreContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("StoreDB")));
             //Configuration.GetConnectionString("StoreDB") -> citeste din appsettings.json cheia "StoreDB"
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(typeof(ProductProfile));
+
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProducService, ProductService>();   //cd .net framework intalneste IProductService tb sa furnizeze implementarea concreta ProductService
             //daca schimb din ProductService in newProductService, inlocuiesc doar aici
@@ -48,6 +56,18 @@ namespace MyStore
 
             services.AddScoped<ISupplierRepository, SupplierRepository>();
             services.AddScoped<ISupplierService, SupplierService>();
+
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddScoped<IShipperRepository, ShipperRepository>();
+            services.AddScoped<IShipperService, ShipperService>();
 
         }
 
