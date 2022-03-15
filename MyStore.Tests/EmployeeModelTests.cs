@@ -17,9 +17,9 @@ namespace MyStore.Tests
             //arrange
             var sut = new EmployeeModel()
             {
-                Empid = Consts.EmpID,
-                Lastname = Consts.LastName,
-                Firstname = Consts.FirstName,
+                Empid = Consts.EmpIDTest1,
+                Lastname = Consts.LastNameTest1,
+                Firstname = Consts.FirstNameTest1,
                 Title = Consts.Title,
                 Titleofcourtesy = Consts.Titleofcourtesy,
                 Birthdate = Consts.BirthDate,
@@ -46,9 +46,9 @@ namespace MyStore.Tests
             //arrange
             var sut = new EmployeeModel()
             {
-                Empid = Consts.EmpID,
+                Empid = Consts.EmpIDTest1,
                 Lastname = "",
-                Firstname = Consts.FirstName,
+                Firstname = Consts.FirstNameTest1,
                 Title = Consts.Title,
                 Titleofcourtesy = Consts.Titleofcourtesy,
                 Birthdate = Consts.BirthDate,

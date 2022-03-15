@@ -69,6 +69,9 @@ namespace MyStore
             services.AddScoped<IShipperRepository, ShipperRepository>();
             services.AddScoped<IShipperService, ShipperService>();
 
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

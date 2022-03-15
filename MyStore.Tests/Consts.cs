@@ -8,10 +8,8 @@ namespace MyStore.Tests
 {
     public static class Consts
     {
-        //public static int categoryID = 2;  //use enum instead
-        //public static int TestProductID = 3;
-        //public static string productName = "Test product name 1";
-        public static int ShipperIDTest = 2;
+        public static int ShipperIDTest1 = 2;
+        public static int ShipperIDTest2 = 3;
         public const string CategoryNameRequiredMessage = "The Categoryname field is required.";
         public const string CompanyNameRequiredMessage = "The Companyname field is required.";
         public const string LastNameRequiredMessage = "The Lastname field is required.";
@@ -29,10 +27,14 @@ namespace MyStore.Tests
         public const string Phone = "Phone test";
         public const string Fax = "Fax test";
 
-        public const int CustID = 1;
-        public const int EmpID = 1;
-        public const string LastName = "Popescu";
-        public const string FirstName = "Ion";
+        public const int CustIDTest1 = 1;
+        public const int CustIDTest2 = 2;
+        public const int EmpIDTest1 = 1;
+        public const int EmpIDTest2 = 2;
+        public const string LastNameTest1 = "Popescu";
+        public const string FirstNameTest1 = "Ion";
+        public const string LastNameTest2 = "Ionescu";
+        public const string FirstNameTest2 = "Dan";
         public const string Title = "Test title";
         public const string Titleofcourtesy = "Mr.";
         public static DateTime BirthDate = new DateTime(2021, 1, 1);
@@ -59,7 +61,8 @@ namespace MyStore.Tests
         public const int ProductIDTest3 = 3;
         public const int CategoryIDTest1 = 1;
         public const int CategoryIDTest2 = 2;
-        public const int SupplierIDTest = 4;
+        public const int SupplierIDTest1 = 4;
+        public const int SupplierIDTest2 = 2;
         public static decimal UnitPriceTest = 100.23M;
         public const string ProductNameTest1 = "Product test 1";
         public const string ProductNameTest2 = "Product test 2";

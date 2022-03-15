@@ -11,15 +11,14 @@ namespace MyStore.Tests
 {
     public class SupplierModelTests
     {
-        public class CustomerModelTests
-        {
+   
             [Fact]
             public void Should_Pass()
             {
                 //arrange
                 var sut = new SupplierModel()
                 {
-                    Supplierid = Consts.SupplierIDTest,
+                    Supplierid = Consts.SupplierIDTest1,
                     Companyname = Consts.SupplierCompanyName,
                     Contactname = Consts.ContactName,
                     Contacttitle = Consts.ContactTitle,
@@ -46,7 +45,7 @@ namespace MyStore.Tests
                 //arrange
                 var sut = new SupplierModel()
                 {
-                    Supplierid = Consts.SupplierIDTest,
+                    Supplierid = Consts.SupplierIDTest1,
                     Companyname = "",
                     Contactname = Consts.ContactName,
                     Contacttitle = Consts.ContactTitle,
@@ -71,4 +70,4 @@ namespace MyStore.Tests
 
         }
     }
-}
+

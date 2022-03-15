@@ -134,7 +134,7 @@ namespace MyStore.Tests
                 Productid = Consts.ProductIDTest1,
                 Productname = Consts.ProductNameTest1,
                 Categoryid = (int)Consts.Categories.Condiments,
-                Supplierid = Consts.SupplierIDTest,
+                Supplierid = Consts.SupplierIDTest1,
                 Unitprice = Consts.UnitPriceTest,
                 Discontinued = Consts.DiscontinuedTest
             };
@@ -183,7 +183,7 @@ namespace MyStore.Tests
             return new ProductModel
             {
                 Productname = Consts.ProductNameTest1,
-                Supplierid = Consts.SupplierIDTest,
+                Supplierid = Consts.SupplierIDTest1,
                 Categoryid =(int)Consts.Categories.Condiments,
                 Unitprice = Consts.UnitPriceTest,
                 Discontinued = Consts.DiscontinuedTest
@@ -199,7 +199,7 @@ namespace MyStore.Tests
                     Productid = Consts.ProductIDTest1,
                     Productname = Consts.ProductNameTest1,
                     Categoryid = (int)Consts.Categories.Condiments,
-                    Supplierid = Consts.SupplierIDTest,
+                    Supplierid = Consts.SupplierIDTest1,
                     Unitprice = Consts.UnitPriceTest,
                     Discontinued = Consts.DiscontinuedTest
                 },
@@ -208,7 +208,7 @@ namespace MyStore.Tests
                     Productid = Consts.ProductIDTest2,
                     Productname = Consts.ProductNameTest2,
                     Categoryid = (int)Consts.Categories.Confections,
-                    Supplierid = Consts.SupplierIDTest,
+                    Supplierid = Consts.SupplierIDTest2,
                     Unitprice = Consts.UnitPriceTest,
                     Discontinued = Consts.DiscontinuedTest
                 },
@@ -217,7 +217,7 @@ namespace MyStore.Tests
                     Productid = Consts.ProductIDTest3,
                     Productname = Consts.ProductNameTest3,
                     Categoryid = (int)Consts.Categories.Dairy,
-                    Supplierid = Consts.SupplierIDTest,
+                    Supplierid = Consts.SupplierIDTest1,
                     Unitprice = Consts.UnitPriceTest,
                     Discontinued = Consts.DiscontinuedTest
                 }

@@ -17,7 +17,7 @@ namespace MyStore.Tests
             //arrange
             var sut = new ShipperModel()
             {
-                Shipperid = Consts.ShipperIDTest,
+                Shipperid = Consts.ShipperIDTest1,
                 Companyname = Consts.ShipperCompanyName,
                 Phone = Consts.Phone
             };

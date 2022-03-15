@@ -50,7 +50,7 @@ namespace MyStore.Tests
             {
                 Categoryid = ValidCategoryId,
                 Productid = Consts.ProductIDTest1,
-                Supplierid = Consts.SupplierIDTest,
+                Supplierid = Consts.SupplierIDTest1,
                 Unitprice = Consts.UnitPriceTest,
                 Discontinued = true,
                 Productname = ""

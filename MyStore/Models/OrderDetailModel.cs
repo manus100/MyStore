@@ -7,7 +7,7 @@ using MyStore.Domain.Entities;
 
 namespace MyStore.Models
 {
-    public class OrderDetail
+    public class OrderDetailModel
     {
        
         public int Orderid { get; set; }

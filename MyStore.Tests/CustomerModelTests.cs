@@ -20,7 +20,7 @@ namespace MyStore.Tests
             //arrange
             var sut = new CustomerModel()
             {
-                Custid = Consts.CustID,
+                Custid = Consts.CustIDTest1,
                 Companyname = Consts.CompanyName,
                 Contactname = Consts.ContactName,
                 Contacttitle = Consts.ContactTitle,
@@ -47,7 +47,7 @@ namespace MyStore.Tests
             //arrange
             var sut = new CustomerModel()
             {
-                Custid = Consts.CustID,
+                Custid = Consts.CustIDTest1,
                 Companyname = "",
                 Contactname = Consts.ContactName,
                 Contacttitle = Consts.ContactTitle,
