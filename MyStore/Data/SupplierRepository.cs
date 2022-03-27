@@ -13,7 +13,7 @@ namespace MyStore.Data
         bool Exists(int id);
         IEnumerable<Supplier> GetAll();
         Supplier GetByID(int id);
-        void Update(Supplier supplierToUpdate);
+        Supplier Update(Supplier supplierToUpdate);
     }
     public class SupplierRepository : ISupplierRepository
     {
@@ -48,10 +48,12 @@ namespace MyStore.Data
             return (exists == 1);
         }
 
-        public void Update(Supplier supplierToUpdate)
+        public Supplier Update(Supplier supplierToUpdate)
         {
-            context.Suppliers.Update(supplierToUpdate);
+            var updatedSupplier = context.Suppliers.Update(supplierToUpdate);
             context.SaveChanges();
+
+            return updatedSupplier.Entity;
         }
 
         public bool Delete(Supplier supplierToDelete)

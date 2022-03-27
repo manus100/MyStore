@@ -55,7 +55,7 @@ namespace MyStore.Controllers
 
         // PUT api/<SuppliersController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] SupplierModel supplierToUpdate)
+        public ActionResult<SupplierModel> Put(int id, [FromBody] SupplierModel supplierToUpdate)
         {
             if (id!= supplierToUpdate.Supplierid)
             {
@@ -67,8 +67,9 @@ namespace MyStore.Controllers
                 return NotFound();
             }
 
-            supplierService.Update(supplierToUpdate);
-            return NoContent();
+            var updatedSupplier = supplierService.Update(supplierToUpdate);
+            // return NoContent();
+            return Ok(updatedSupplier);
         }
 
         // DELETE api/<SuppliersController>/5

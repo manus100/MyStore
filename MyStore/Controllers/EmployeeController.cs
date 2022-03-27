@@ -60,7 +60,7 @@ namespace MyStore.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(ProductModel))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Put(int id, [FromBody] EmployeeModel model)
+        public ActionResult<EmployeeModel> Put(int id, [FromBody] EmployeeModel model)
         {
             if (id != model.Empid)
             {
@@ -73,8 +73,9 @@ namespace MyStore.Controllers
                return NotFound();
             }
 
-            employeeService.Update(model);
-            return NoContent();
+            var updatedEmployee = employeeService.Update(model);
+            // return NoContent();
+            return Ok(updatedEmployee);
 
         }
 

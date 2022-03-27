@@ -17,7 +17,7 @@ namespace MyStore.Services
         IEnumerable<CategoryModel> GetAll();
         CategoryModel GetByID(int id);
         bool HasProducts(int id);
-        void Update(CategoryModel category);
+        CategoryModel Update(CategoryModel category);
     }
     public class CategoryService : ICategoryService
     {
@@ -47,9 +47,11 @@ namespace MyStore.Services
             return mapper.Map<CategoryModel>(addedCategory);
         }
 
-        public void Update(CategoryModel category)
+        public CategoryModel Update(CategoryModel category)
         {
-            categoryRepository.Update(mapper.Map<Category>(category));
+            var updatedCategory= categoryRepository.Update(mapper.Map<Category>(category));
+
+            return mapper.Map<CategoryModel>(updatedCategory); 
         }
 
         public bool Exists(int id)

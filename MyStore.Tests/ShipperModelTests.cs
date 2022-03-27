@@ -17,9 +17,9 @@ namespace MyStore.Tests
             //arrange
             var sut = new ShipperModel()
             {
-                Shipperid = Consts.ShipperIDTest1,
-                Companyname = Consts.ShipperCompanyName,
-                Phone = Consts.Phone
+                Shipperid = ShipperConsts.ShipperId,
+                Companyname = ShipperConsts.ShipperCompanyName,
+                Phone = ShipperConsts.Phone
             };
 
             //act
@@ -37,7 +37,7 @@ namespace MyStore.Tests
             var sut = new ShipperModel()
             {
                 Companyname = "",
-                Phone = Consts.Phone
+                Phone = ShipperConsts.Phone
             };
 
             //act
@@ -46,7 +46,7 @@ namespace MyStore.Tests
 
             //assert
             var message = validationResults[0];
-            Assert.Equal(Consts.CompanyNameRequiredMessage, message.ErrorMessage);
+            Assert.Equal(ProductConsts.CompanyNameRequiredMessage, message.ErrorMessage);
         }
 
     }

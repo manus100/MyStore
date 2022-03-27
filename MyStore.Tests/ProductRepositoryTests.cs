@@ -29,32 +29,116 @@ namespace MyStore.Tests
             var result = mockRepo.Object.GetAll();   //instanta dummy pe care si-o face el si de pe care pot apela metode care sunt in repository-ul meu
 
             //assert
-            Assert.Equal(2, result.Count());
+            Assert.Equal(3, result.Count());
 
             Assert.IsType<List<Product>>(result);
 
         }
 
+        [Fact]
+        public void Should_GetOneProduct()
+        {
+            //arrange
+            var mocRepo = new Mock<IProductRepository>();
+            mocRepo.Setup(repo => repo.GetByID(ProductConsts.Product1Id))
+                .Returns(ReturnOneProduct(ProductConsts.Product1Id));
+
+            //act
+            var result = mocRepo.Object.GetByID(ProductConsts.Product1Id);
+
+            //asert
+            Assert.Equal(ProductConsts.Product1Id, result.Productid);
+            Assert.IsType<Product>(result);
+
+        }
+
+        [Fact]
+        public void Shoul_Return_Product_On_Post()
+        {
+            //arrange
+            var mocRepo = new Mock<IProductRepository>();
+            mocRepo.Setup(repo => repo.Add(It.IsAny<Product>()))
+                .Returns(ReturnOneProduct(ProductConsts.Product1Id));
+
+            //act
+            var result = mocRepo.Object.Add(ReturnOneProduct(ProductConsts.Product1Id));
+
+            //asert
+            Assert.Equal(ProductConsts.ProductName1, result.Productname);
+            Assert.IsType<Product>(result);
+
+        }
+
+        [Fact]
+        public void ShouldReturn_Product_On_Put()
+        {
+            //arrange
+            var mocRepo = new Mock<IProductRepository>();
+            mocRepo.Setup(repo => repo.Update(It.IsAny<Product>()))
+                .Returns(ReturnOneProduct(ProductConsts.Product1Id));
+
+            //act
+            var result = mocRepo.Object.Update(ReturnOneProduct(ProductConsts.Product1Id));
+
+            //asert
+            Assert.Equal(ProductConsts.ProductName1, result.Productname);
+            Assert.IsType<Product>(result);
+        }
+
+        [Fact]
+        public void Shoul_Return_True_On_Delete()
+        {
+            //arrange
+            var mocRepo = new Mock<IProductRepository>();
+            mocRepo.Setup(repo => repo.Delete(It.IsAny<Product>()))
+                .Returns(true);
+
+            //act
+            var result = mocRepo.Object.Delete(ReturnOneProduct(ProductConsts.Product1Id));
+
+            //asert
+            Assert.True(result);
+
+        }
+
+        private Product ReturnOneProduct(int i)
+        {
+            IEnumerable<Product> products = ReturnMultiple();
+            return products.Where(x => x.Productid == i).FirstOrDefault();
+        }
+
         private List<Product> ReturnMultiple()
         {
             return new List<Product>()
-                    {
-                    new Product{
-                        Categoryid=1,
-                        Productname="test",
-                        Supplierid=2,
-                        Unitprice=10,
-                        Discontinued=true
-                    },
-                        new Product{
-                        Categoryid=2,
-                        Productname="test2",
-                        Supplierid=3,
-                        Unitprice=100,
-                        Discontinued=true
-                        }
-
-                    };
+            {
+                new Product
+                {
+                    Productid = ProductConsts.Product1Id,
+                    Productname = ProductConsts.ProductName1,
+                    Categoryid = (int)CategoryConsts.Categories.Condiments,
+                    Supplierid = CustomerSupplierConsts.SupplierId,
+                    Unitprice = ProductConsts.UnitPriceTest,
+                    Discontinued = ProductConsts.DiscontinuedTest
+                },
+                new Product
+                {
+                    Productid = ProductConsts.Product2Id,
+                    Productname = ProductConsts.ProductName2,
+                    Categoryid = (int)CategoryConsts.Categories.Confections,
+                    Supplierid = CustomerSupplierConsts.SupplierId2,
+                    Unitprice = ProductConsts.UnitPriceTest,
+                    Discontinued = ProductConsts.DiscontinuedTest
+                },
+                new Product
+                {
+                    Productid = ProductConsts.Product3Id,
+                    Productname = ProductConsts.ProductName3,
+                    Categoryid = (int)CategoryConsts.Categories.Dairy,
+                    Supplierid = CustomerSupplierConsts.SupplierId,
+                    Unitprice = ProductConsts.UnitPriceTest,
+                    Discontinued = ProductConsts.DiscontinuedTest
+                }
+            };
         }
 
     }

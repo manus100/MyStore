@@ -4,36 +4,68 @@ using System.Linq;
 using System.Threading.Tasks;
 using MyStore.Data;
 using MyStore.Domain.Entities;
+using MyStore.Infrastructure;
 
 namespace MyStore.Services
 {
     public interface IOrderService
     {
-        void AddOrder();
-        IEnumerable<Order> GetAll();
+        Order Add(Order newOrder);
+        bool Delete(int id);
+        bool Exists(int id);
+        IEnumerable<Order> GetAll(string? city, List<String>? country, Shippers shipper);
+        Order GetByID(int id);
+        Order UpdateOrder(Order orderToUpdate);
     }
 
     public class OrderService : IOrderService
     {
-        private readonly IOrderRepository repository;
+        private readonly IOrderRepository orderRepository;
 
-        public OrderService(IOrderRepository repository)
+        public OrderService(IOrderRepository orderRepository)
         {
-            this.repository = repository;
+            this.orderRepository = orderRepository;
         }
 
-        public IEnumerable<Order> GetAll()
+        public IEnumerable<Order> GetAll(string? city,  List<String>? country, Shippers shipper)
         {
-            List<string> shipCities = new() { "Seattle", "Portland" };
-
-            var allOrders = repository.GetAll("USA", shipCities).ToList();
+ 
+            var allOrders = orderRepository.GetAll(city, country, shipper).ToList();
 
             return allOrders;
         }
 
-        public void AddOrder()
+  
+        public Order Add(Order newOrder)
         {
-            repository.Add();
+            return orderRepository.Add(newOrder);
+        }
+
+        public Order GetByID(int id)
+        {
+            return orderRepository.GetByID(id);
+        }
+
+        public bool Exists(int id)
+        {
+            return orderRepository.Exists(id);
+        }
+
+        public Order UpdateOrder(Order orderToUpdate)
+        {
+            return orderRepository.Update(orderToUpdate);
+        }
+
+        public bool Delete(int id)
+        {
+            var itemToDelete = orderRepository.GetByID(id);
+
+            if (itemToDelete == null)
+            {
+                //eroare
+                return false;
+            }
+            return orderRepository.Delete(itemToDelete);
         }
     }
 }

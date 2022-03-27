@@ -17,7 +17,7 @@ namespace MyStore.Service
         IEnumerable<ShipperModel> GetAll();
         ShipperModel GetByID(int id);
         bool HasOrders(int id);
-        void Update(ShipperModel shipper);
+        ShipperModel Update(ShipperModel shipper);
     }
     public class ShipperService : IShipperService
     {
@@ -51,9 +51,11 @@ namespace MyStore.Service
             return shipperRepository.Exists(id);
         }
 
-        public void Update(ShipperModel shipper)
+        public ShipperModel Update(ShipperModel shipper)
         {
-            shipperRepository.Update(mapper.Map<Shipper>(shipper));
+            var updatedShipper = shipperRepository.Update(mapper.Map<Shipper>(shipper));
+
+            return mapper.Map<ShipperModel>(updatedShipper);
         }
 
         public bool HasOrders(int id)

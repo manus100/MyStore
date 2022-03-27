@@ -18,8 +18,8 @@ namespace MyStore.Tests
             //arrange
             var sut = new CategoryModel()   
             {
-                Categoryname = Consts.ValidCategoryName,
-                Description = Consts.ValidCategoryDescription
+                Categoryname = CategoryConsts.Categoryname,
+                Description = CategoryConsts.Description
             };
 
             //act
@@ -37,7 +37,7 @@ namespace MyStore.Tests
             var sut = new CategoryModel()
             {
                 Categoryname = "",
-                Description = Consts.ValidCategoryDescription
+                Description = CategoryConsts.Description
             };
 
             //act
@@ -52,7 +52,7 @@ namespace MyStore.Tests
             //    Assert.Equal(validationResults[i].ErrorMessage, message[i].ErrorMessage);
             //}
             var message = validationResults[0];
-            Assert.Equal(Consts.CategoryNameRequiredMessage, message.ErrorMessage);
+            Assert.Equal(ProductConsts.CategoryNameRequiredMessage, message.ErrorMessage);
         }
 
     }

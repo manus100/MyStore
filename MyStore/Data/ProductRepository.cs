@@ -46,14 +46,15 @@ namespace MyStore.Data
         public Product GetByID(int id)
         {
             //return context.Products.Where(x => x.Productid == id);  //nu merge
-           return context.Products.Find(id);
-          
+          // return context.Products.Find(id);
+            return context.Products.FirstOrDefault(x => x.Productid == id);
+
         }
 
         public bool Exists(int id)
         {
             var exists = context.Products.Count(x => x.Productid == id);
-            return exists==1;
+            return exists == 1;
         }
 
         //public  IEnumerable GetProductCategory()

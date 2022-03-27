@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MyStore.Domain.Entities;
 
 namespace MyStore.Models
 {
@@ -21,5 +22,7 @@ namespace MyStore.Models
         public string Shipregion { get; set; }
         public string Shippostalcode { get; set; }
         public string Shipcountry { get; set; }
+
+        public  ICollection<OrderDetailModel> OrderDetails { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace MyStore.Data
         bool Exists(int id);
         IEnumerable<Customer> GetAll();
         Customer GetByID(int id);
-        void Update(Customer customerToUpdate);
+        Customer Update(Customer customerToUpdate);
     }
     public class CustomerRepository : ICustomerRepository
     {
@@ -47,10 +47,12 @@ namespace MyStore.Data
             return addedCustomer.Entity;
         }
 
-        public void Update(Customer customerToUpdate)
+        public Customer Update(Customer customerToUpdate)
         {
-            context.Customers.Update(customerToUpdate);
+            var updatedCustomer = context.Customers.Update(customerToUpdate);
             context.SaveChanges();
+
+            return updatedCustomer.Entity;
         }
 
         public bool Exists(int id)

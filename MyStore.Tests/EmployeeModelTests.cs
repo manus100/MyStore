@@ -17,19 +17,19 @@ namespace MyStore.Tests
             //arrange
             var sut = new EmployeeModel()
             {
-                Empid = Consts.EmpIDTest1,
-                Lastname = Consts.LastNameTest1,
-                Firstname = Consts.FirstNameTest1,
-                Title = Consts.Title,
-                Titleofcourtesy = Consts.Titleofcourtesy,
-                Birthdate = Consts.BirthDate,
-                Hiredate = Consts.HireDate,
-                Address = Consts.Address,
-                City = Consts.City,
-                Region = Consts.Region,
-                Country = Consts.Country,
-                Phone = Consts.Phone,
-                Mgrid = Consts.MgrID
+                Empid = EmployeeConsts.EmpId,
+                Lastname = EmployeeConsts.LastName1,
+                Firstname = EmployeeConsts.FirstName1,
+                Title = EmployeeConsts.Title,
+                Titleofcourtesy = EmployeeConsts.Titleofcourtesy,
+                Birthdate = EmployeeConsts.BirthDate,
+                Hiredate = EmployeeConsts.HireDate,
+                Address = EmployeeConsts.Address,
+                City = EmployeeConsts.City,
+                Region = EmployeeConsts.Region,
+                Country = EmployeeConsts.Country,
+                Phone = EmployeeConsts.Phone,
+                Mgrid = EmployeeConsts.MgrID
             };
 
             //act
@@ -46,19 +46,19 @@ namespace MyStore.Tests
             //arrange
             var sut = new EmployeeModel()
             {
-                Empid = Consts.EmpIDTest1,
+                Empid = EmployeeConsts.EmpId,
                 Lastname = "",
-                Firstname = Consts.FirstNameTest1,
-                Title = Consts.Title,
-                Titleofcourtesy = Consts.Titleofcourtesy,
-                Birthdate = Consts.BirthDate,
-                Hiredate = Consts.HireDate,
-                Address = Consts.Address,
-                City = Consts.City,
-                Region = Consts.Region,
-                Country = Consts.Country,
-                Phone = Consts.Phone,
-                Mgrid = Consts.MgrID
+                Firstname = EmployeeConsts.FirstName1,
+                Title = EmployeeConsts.Title,
+                Titleofcourtesy = EmployeeConsts.Titleofcourtesy,
+                Birthdate = EmployeeConsts.BirthDate,
+                Hiredate = EmployeeConsts.HireDate,
+                Address = EmployeeConsts.Address,
+                City = EmployeeConsts.City,
+                Region = EmployeeConsts.Region,
+                Country = EmployeeConsts.Country,
+                Phone = EmployeeConsts.Phone,
+                Mgrid = EmployeeConsts.MgrID
             };
 
             //act
@@ -68,7 +68,7 @@ namespace MyStore.Tests
             //assert
 
             var message = validationResults[0];
-            Assert.Equal(Consts.LastNameRequiredMessage, message.ErrorMessage);
+            Assert.Equal(EmployeeConsts.LastNameRequiredMessage, message.ErrorMessage);
         }
 
     }

@@ -54,7 +54,7 @@ namespace MyStore.Controllers
 
         // PUT api/<CustomersController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] CustomerModel customerToUpdate)
+        public ActionResult<CustomerModel> Put(int id, [FromBody] CustomerModel customerToUpdate)
         {
             if (id!= customerToUpdate.Custid)
             {
@@ -65,8 +65,9 @@ namespace MyStore.Controllers
                 return NotFound();
             }
 
-            customerService.UpdateCustomer(customerToUpdate);
-            return NoContent();
+            var updatedCustomer = customerService.UpdateCustomer(customerToUpdate);
+            // return NoContent();
+            return Ok(updatedCustomer);
         }
 
         // DELETE api/<CustomersController>/5

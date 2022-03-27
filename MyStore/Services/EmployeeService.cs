@@ -17,7 +17,7 @@ namespace MyStore.Services
         IEnumerable<EmployeeModel> GetAll();
         EmployeeModel GetByID(int id);
         bool HasSubordinates(int id);
-        void Update(EmployeeModel employeeToUpdate);
+        EmployeeModel Update(EmployeeModel employeeToUpdate);
     }
     public class EmployeeService : IEmployeeService
     {
@@ -51,9 +51,10 @@ namespace MyStore.Services
 
         }
 
-        public void Update(EmployeeModel employeeToUpdate)
+        public EmployeeModel Update(EmployeeModel employeeToUpdate)
         {
-            employeeRepository.Update(mapper.Map<Employee>(employeeToUpdate));
+            var updatedEmployee = employeeRepository.Update(mapper.Map<Employee>(employeeToUpdate));
+            return mapper.Map<EmployeeModel>(updatedEmployee);
         }
 
         public bool Exists(int id)

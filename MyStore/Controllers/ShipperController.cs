@@ -57,7 +57,7 @@ namespace MyStore.Controllers
 
         // PUT api/<ShipperController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ShipperModel model)
+        public ActionResult<ShipperModel> Put(int id, [FromBody] ShipperModel model)
         {
             if (id != model.Shipperid)
             {
@@ -69,8 +69,9 @@ namespace MyStore.Controllers
                 return NotFound();
             }
 
-            shipperService.Update(model);
-            return NoContent();
+            var updatedShipper = shipperService.Update(model);
+            // return NoContent();
+            return Ok(updatedShipper);
 
         }
 

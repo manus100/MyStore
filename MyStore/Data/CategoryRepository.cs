@@ -14,7 +14,7 @@ namespace MyStore.Data
         IEnumerable<Category> GetAll();
         Category GetByID(int id);
         bool HasProducts(int id);
-        void Update(Category category);
+        Category Update(Category category);
     }
     public class CategoryRepository : ICategoryRepository
     {
@@ -44,10 +44,12 @@ namespace MyStore.Data
             return addedCategory.Entity;
         }
 
-        public void Update(Category category)
+        public Category Update(Category category)
         {
-            context.Categories.Update(category);
+            var updatedCategory = context.Categories.Update(category);
             context.SaveChanges();
+
+            return updatedCategory.Entity;
         }
 
         public bool Exists(int id)

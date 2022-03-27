@@ -110,7 +110,7 @@ namespace MyStore.Services
 
         public bool CheckPrice(ProductModel model)
         {
-            if (model.Supplierid == 1 && model.Unitprice < 50)
+            if (model.Supplierid == Consts.SupplierID && model.Unitprice < Consts.MinPrice)
             {
                 return false;
             }

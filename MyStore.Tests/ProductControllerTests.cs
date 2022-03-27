@@ -67,13 +67,13 @@ namespace MyStore.Tests
         public void Shoul_Return_Ok_On_GetById()
         {
             //arrange
-            mockProductService.Setup(x => x.GetByID(Consts.ProductIDTest2))
-                .Returns(MultipleProducts()[Consts.ProductIDTest2 - 1]);
+            mockProductService.Setup(x => x.GetByID(ProductConsts.Product2Id))
+                .Returns(MultipleProducts()[ProductConsts.Product2Id - 1]);
 
             var controller = new ProductsController(mockProductService.Object);
 
             //act
-            var response = controller.Get(Consts.ProductIDTest2);
+            var response = controller.Get(ProductConsts.Product2Id);
 
             var result = response.Result as OkObjectResult;
             var actualData = result.Value as ProductModel;
@@ -88,19 +88,19 @@ namespace MyStore.Tests
         public void ShouldReturn_ProductID()
         {
             //arrange
-            mockProductService.Setup(x => x.GetByID(Consts.ProductIDTest2))
-                .Returns(MultipleProducts()[Consts.ProductIDTest2 - 1]);
+            mockProductService.Setup(x => x.GetByID(ProductConsts.Product2Id))
+                .Returns(MultipleProducts()[ProductConsts.Product2Id - 1]);
 
             var controller = new ProductsController(mockProductService.Object);
 
             //act
-            var response = controller.Get(Consts.ProductIDTest2);
+            var response = controller.Get(ProductConsts.Product2Id);
 
             var result = response.Result as OkObjectResult;
             var actualData = result.Value as ProductModel;
 
             //assert
-            Assert.Equal(Consts.ProductIDTest2, actualData.Productid);
+            Assert.Equal(ProductConsts.Product2Id, actualData.Productid);
 
         }
 
@@ -120,7 +120,7 @@ namespace MyStore.Tests
 
             //assert
             Assert.IsType<CreatedAtActionResult>(result);
-            Assert.IsType<ProductModel>(actualData); ;
+            Assert.IsType<ProductModel>(actualData); 
             // Assert.Equal(4, actualData.Supplierid);
             //  Assert.Equal("Product Test 1", actualData.Productname);
 
@@ -131,23 +131,23 @@ namespace MyStore.Tests
         {
             ProductModel model = new ProductModel
             {
-                Productid = Consts.ProductIDTest1,
-                Productname = Consts.ProductNameTest1,
-                Categoryid = (int)Consts.Categories.Condiments,
-                Supplierid = Consts.SupplierIDTest1,
-                Unitprice = Consts.UnitPriceTest,
-                Discontinued = Consts.DiscontinuedTest
+                Productid = ProductConsts.Product1Id,
+                Productname = ProductConsts.ProductName1,
+                Categoryid = (int)CategoryConsts.Categories.Condiments,
+                Supplierid = CustomerSupplierConsts.SupplierId,
+                Unitprice = ProductConsts.UnitPriceTest,
+                Discontinued = ProductConsts.DiscontinuedTest
             };
 
             //arrange
             mockProductService.Setup(x => x.UpdateProduct(It.IsAny<ProductModel>())).Returns(model);
-            mockProductService.Setup(x => x.Exists(Consts.ProductIDTest1)).Returns(true);
+            mockProductService.Setup(x => x.Exists(ProductConsts.Product1Id)).Returns(true);
             mockProductService.Setup(x => x.CheckPrice(model)).Returns(true);
 
             var controller = new ProductsController(mockProductService.Object);
 
             //act
-            var response = controller.Put(Consts.ProductIDTest1, model);
+            var response = controller.Put(ProductConsts.Product1Id, model);
 
             var result = response.Result as OkObjectResult;
             var actualData = result.Value as ProductModel;
@@ -182,11 +182,11 @@ namespace MyStore.Tests
         {
             return new ProductModel
             {
-                Productname = Consts.ProductNameTest1,
-                Supplierid = Consts.SupplierIDTest1,
-                Categoryid =(int)Consts.Categories.Condiments,
-                Unitprice = Consts.UnitPriceTest,
-                Discontinued = Consts.DiscontinuedTest
+                Productname = ProductConsts.ProductName1,
+                Supplierid = CustomerSupplierConsts.SupplierId,
+                Categoryid =(int)CategoryConsts.Categories.Condiments,
+                Unitprice = ProductConsts.UnitPriceTest,
+                Discontinued = ProductConsts.DiscontinuedTest
             };
         }
 
@@ -196,30 +196,30 @@ namespace MyStore.Tests
             {
                 new ProductModel
                 {
-                    Productid = Consts.ProductIDTest1,
-                    Productname = Consts.ProductNameTest1,
-                    Categoryid = (int)Consts.Categories.Condiments,
-                    Supplierid = Consts.SupplierIDTest1,
-                    Unitprice = Consts.UnitPriceTest,
-                    Discontinued = Consts.DiscontinuedTest
+                    Productid = ProductConsts.Product1Id,
+                    Productname = ProductConsts.ProductName1,
+                    Categoryid = (int)CategoryConsts.Categories.Condiments,
+                    Supplierid = CustomerSupplierConsts.SupplierId,
+                    Unitprice = ProductConsts.UnitPriceTest,
+                    Discontinued = ProductConsts.DiscontinuedTest
                 },
                 new ProductModel
                 {
-                    Productid = Consts.ProductIDTest2,
-                    Productname = Consts.ProductNameTest2,
-                    Categoryid = (int)Consts.Categories.Confections,
-                    Supplierid = Consts.SupplierIDTest2,
-                    Unitprice = Consts.UnitPriceTest,
-                    Discontinued = Consts.DiscontinuedTest
+                    Productid = ProductConsts.Product2Id,
+                    Productname = ProductConsts.ProductName2,
+                    Categoryid = (int)CategoryConsts.Categories.Confections,
+                    Supplierid = CustomerSupplierConsts.SupplierId2,
+                    Unitprice = ProductConsts.UnitPriceTest,
+                    Discontinued = ProductConsts.DiscontinuedTest
                 },
                 new ProductModel
                 {
-                    Productid = Consts.ProductIDTest3,
-                    Productname = Consts.ProductNameTest3,
-                    Categoryid = (int)Consts.Categories.Dairy,
-                    Supplierid = Consts.SupplierIDTest1,
-                    Unitprice = Consts.UnitPriceTest,
-                    Discontinued = Consts.DiscontinuedTest
+                    Productid = ProductConsts.Product3Id,
+                    Productname = ProductConsts.ProductName3,
+                    Categoryid = (int)CategoryConsts.Categories.Dairy,
+                    Supplierid = CustomerSupplierConsts.SupplierId,
+                    Unitprice = ProductConsts.UnitPriceTest,
+                    Discontinued = ProductConsts.DiscontinuedTest
                 }
             };
         }

@@ -44,6 +44,9 @@ namespace MyStore
             services.AddDbContext<StoreContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("StoreDB")));
             //Configuration.GetConnectionString("StoreDB") -> citeste din appsettings.json cheia "StoreDB"
 
+            //load the appsettings in a strongly-typed class
+            services.Configure<MySettings>(Configuration.GetSection("MySettings"));
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddAutoMapper(typeof(ProductProfile));
 
@@ -72,6 +75,9 @@ namespace MyStore
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderService, OrderService>();
 
+            services.AddScoped<IReportsRepository, ReportsRepository>();
+            services.AddScoped<IReportsService, ReportsService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +93,8 @@ namespace MyStore
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<SecurityHeaderMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

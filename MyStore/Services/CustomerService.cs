@@ -16,7 +16,7 @@ namespace MyStore.Services
         bool Exists(int id);
         IEnumerable<CustomerModel> GetAll();
         CustomerModel GetByID(int id);
-        void UpdateCustomer(CustomerModel model);
+        CustomerModel UpdateCustomer(CustomerModel model);
     }
 
     public class CustomerService :ICustomerService
@@ -51,10 +51,13 @@ namespace MyStore.Services
             return mapper.Map<CustomerModel>(addedCustomer);
         }
 
-        public void UpdateCustomer(CustomerModel model)
+        public CustomerModel UpdateCustomer(CustomerModel model)
         {
             Customer customerToUpdate = mapper.Map<Customer>(model);
-            customerRepository.Update(customerToUpdate);
+            var updatedCustomer = customerRepository.Update(customerToUpdate);
+
+            return mapper.Map<CustomerModel>(updatedCustomer);
+
         }
 
         public bool Exists(int id)

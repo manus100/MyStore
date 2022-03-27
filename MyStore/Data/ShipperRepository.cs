@@ -14,7 +14,7 @@ namespace MyStore.Data
         IEnumerable<Shipper> GetAll();
         Shipper GetByID(int id);
         bool HasOrders(int id);
-        void Update(Shipper shipper);
+        Shipper Update(Shipper shipper);
     }
     public class ShipperRepository : IShipperRepository
     {
@@ -48,10 +48,12 @@ namespace MyStore.Data
             return (context.Shippers.Count(x => x.Shipperid == id) == 1);
         }
 
-        public void Update(Shipper shipper)
+        public Shipper Update(Shipper shipper)
         {
-            context.Shippers.Update(shipper);
+            var updatedShipper = context.Shippers.Update(shipper);
             context.SaveChanges();
+
+            return updatedShipper.Entity;
         }
 
         public bool HasOrders(int id)

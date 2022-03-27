@@ -15,23 +15,25 @@ namespace MyStore.Tests
     {
         public const string ProductNameRequiredMessage = "Product name is required";
         public const int ValidCategoryId = 2;
+
         //[Fact]
         //public void FailingTest()
         //{
         //    Assert.Equal(2,3);
         //}
+
         [Fact]
         public void Should_Pass()  //validez ca ProductModel e corect
         {
             //arrange
             var sut = new ProductModel()   //subject under test
             {
-                Categoryid = ValidCategoryId,
-                Productid = 2,
-                Supplierid=2,
-                Unitprice=10,
-                Discontinued=true,
-                Productname = "Product Test"
+                Categoryid = CategoryConsts.Categoryid,
+                Productid = ProductConsts.Product2Id,
+                Supplierid = CustomerSupplierConsts.SupplierId,
+                Unitprice = ProductConsts.UnitPriceTest,
+                Discontinued = ProductConsts.DiscontinuedTest,
+                Productname = ProductConsts.ProductName2
             };
 
             //act
@@ -48,11 +50,11 @@ namespace MyStore.Tests
             //arrange
             var sut = new ProductModel()
             {
-                Categoryid = ValidCategoryId,
-                Productid = Consts.ProductIDTest1,
-                Supplierid = Consts.SupplierIDTest1,
-                Unitprice = Consts.UnitPriceTest,
-                Discontinued = true,
+                Categoryid = CategoryConsts.Categoryid,
+                Productid = ProductConsts.Product2Id,
+                Supplierid = CustomerSupplierConsts.SupplierId,
+                Unitprice = ProductConsts.UnitPriceTest,
+                Discontinued = ProductConsts.DiscontinuedTest,
                 Productname = ""
             };
 
@@ -63,8 +65,6 @@ namespace MyStore.Tests
             //assert
             var message = validationResults[0];
             Assert.Equal(ProductNameRequiredMessage, message.ErrorMessage);
-
-            
 
         }
     }

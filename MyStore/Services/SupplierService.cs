@@ -16,7 +16,7 @@ namespace MyStore.Services
         bool Exists(int id);
         IEnumerable<SupplierModel> GetAll();
         SupplierModel GetByID(int id);
-        void Update(SupplierModel model);
+        SupplierModel Update(SupplierModel model);
     }
     public class SupplierService : ISupplierService
     {
@@ -58,9 +58,11 @@ namespace MyStore.Services
             return supplierRepository.Exists(id);
         }
 
-        public void Update(SupplierModel model)
+        public SupplierModel Update(SupplierModel model)
         {
-            supplierRepository.Update(mapper.Map<Supplier>(model));
+            var updatedSupplier = supplierRepository.Update(mapper.Map<Supplier>(model));
+
+            return mapper.Map<SupplierModel>(updatedSupplier);
         }
 
         public bool Delete(int id)

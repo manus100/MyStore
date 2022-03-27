@@ -58,7 +58,7 @@ namespace MyStore.Controllers
 
         // PUT api/<CategoryController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] CategoryModel model)
+        public ActionResult<CategoryModel> Put(int id, [FromBody] CategoryModel model)
         {
             if (id != model.Categoryid)
                 return BadRequest();
@@ -68,8 +68,8 @@ namespace MyStore.Controllers
                 return NotFound();
             }
 
-            categoryService.Update(model);
-            return NoContent();
+            var updatedCategory = categoryService.Update(model);
+            return Ok(updatedCategory);
         }
 
         // DELETE api/<CategoryController>/5

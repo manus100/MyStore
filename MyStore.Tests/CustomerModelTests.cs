@@ -20,17 +20,17 @@ namespace MyStore.Tests
             //arrange
             var sut = new CustomerModel()
             {
-                Custid = Consts.CustIDTest1,
-                Companyname = Consts.CompanyName,
-                Contactname = Consts.ContactName,
-                Contacttitle = Consts.ContactTitle,
-                Address = Consts.Address,
-                City = Consts.City,
-                Region = Consts.Region,
-                Postalcode = Consts.PostalCode,
-                Country = Consts.Country,
-                Phone = Consts.Phone,
-                Fax = Consts.Fax
+                Custid = CustomerSupplierConsts.CustId,
+                Companyname = CustomerSupplierConsts.CompanyName,
+                Contactname = CustomerSupplierConsts.ContactName,
+                Contacttitle = CustomerSupplierConsts.ContactTitle,
+                Address = CustomerSupplierConsts.Address,
+                City = CustomerSupplierConsts.City,
+                Region = CustomerSupplierConsts.Region,
+                Postalcode = CustomerSupplierConsts.PostalCode,
+                Country = CustomerSupplierConsts.Country,
+                Phone = CustomerSupplierConsts.Phone,
+                Fax = CustomerSupplierConsts.Fax
             };
 
             //act
@@ -47,17 +47,17 @@ namespace MyStore.Tests
             //arrange
             var sut = new CustomerModel()
             {
-                Custid = Consts.CustIDTest1,
+                Custid = CustomerSupplierConsts.CustId,
                 Companyname = "",
-                Contactname = Consts.ContactName,
-                Contacttitle = Consts.ContactTitle,
-                Address = Consts.Address,
-                City = Consts.City,
-                Region = Consts.Region,
-                Postalcode = Consts.PostalCode,
-                Country = Consts.Country,
-                Phone = Consts.Phone,
-                Fax = Consts.Fax
+                Contactname = CustomerSupplierConsts.ContactName,
+                Contacttitle = CustomerSupplierConsts.ContactTitle,
+                Address = CustomerSupplierConsts.Address,
+                City = CustomerSupplierConsts.City,
+                Region = CustomerSupplierConsts.Region,
+                Postalcode = CustomerSupplierConsts.PostalCode,
+                Country = CustomerSupplierConsts.Country,
+                Phone = CustomerSupplierConsts.Phone,
+                Fax = CustomerSupplierConsts.Fax
             };
 
             //act
@@ -67,7 +67,7 @@ namespace MyStore.Tests
             //assert
         
             var message = validationResults[0];
-            Assert.Equal(Consts.CompanyNameRequiredMessage, message.ErrorMessage);
+            Assert.Equal(ProductConsts.CompanyNameRequiredMessage, message.ErrorMessage);
         }
 
     }

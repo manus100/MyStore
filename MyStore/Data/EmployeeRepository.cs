@@ -15,7 +15,7 @@ namespace MyStore.Data
         IEnumerable<Employee> GetAll();
         Employee GetByID(int id);
         bool HasSubordinates(int id);
-        void Update(Employee employeeToUpdate);
+        Employee Update(Employee employeeToUpdate);
     }
 
     public class EmployeeRepository : IEmployeeRepository
@@ -45,10 +45,12 @@ namespace MyStore.Data
             return newEmployee.Entity;
         }
 
-        public void Update(Employee employeeToUpdate)
+        public Employee Update(Employee employeeToUpdate)
         {
-            context.Employees.Update(employeeToUpdate);
+            var updatedEmployee = context.Employees.Update(employeeToUpdate);
             context.SaveChanges();
+
+            return updatedEmployee.Entity;
         }
 
         public bool Exists(int id)
