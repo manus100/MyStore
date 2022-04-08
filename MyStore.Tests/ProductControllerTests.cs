@@ -59,7 +59,7 @@ namespace MyStore.Tests
             var actualData = result.Value as IEnumerable<ProductModel>;
 
             //assert
-            Assert.Equal(MultipleProducts().Count(), actualData.Count());
+            Assert.Equal(MultipleProducts().Count, actualData.Count());
         }
 
 
@@ -102,6 +102,20 @@ namespace MyStore.Tests
             //assert
             Assert.Equal(ProductConsts.Product2Id, actualData.Productid);
 
+        }
+
+        [Fact]
+        public void Shoul_Return_NotFound_On_GetById()
+        {
+            //arrange
+            mockProductService.Setup(x => x.GetByID(ProductConsts.NonExistingProductID))
+               .Returns((ProductModel)null);
+            var controller = new ProductsController(mockProductService.Object);
+            //act
+            var response = controller.Get(ProductConsts.NonExistingProductID);
+            var result = response.Result as NotFoundResult;
+            //assert
+            Assert.IsType<NotFoundResult>(result);
         }
 
         [Fact]

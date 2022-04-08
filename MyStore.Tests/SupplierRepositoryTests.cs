@@ -12,16 +12,21 @@ namespace MyStore.Tests
 {
    public class SupplierRepositoryTests
     {
+        private Mock<ISupplierRepository> mockRepo;
+        public SupplierRepositoryTests()
+        {
+            mockRepo = new Mock<ISupplierRepository>();
+        }
+
         [Fact]
         public void Should_GetAllCustomers()
         {
             //arrange
-            var mocRepo = new Mock<ISupplierRepository>();
-            mocRepo.Setup(repo => repo.GetAll())
+            mockRepo.Setup(repo => repo.GetAll())
                 .Returns(ReturnMultiple());
 
             //act
-            var result = mocRepo.Object.GetAll();
+            var result = mockRepo.Object.GetAll();
 
             //asert
             Assert.Equal(2, result.Count());
@@ -33,12 +38,11 @@ namespace MyStore.Tests
         public void Should_GetOneCategory()
         {
             //arrange
-            var mocRepo = new Mock<ISupplierRepository>();
-            mocRepo.Setup(repo => repo.GetByID(CustomerSupplierConsts.SupplierId))
+            mockRepo.Setup(repo => repo.GetByID(CustomerSupplierConsts.SupplierId))
                 .Returns(ReturnOneSupplier(CustomerSupplierConsts.SupplierId));
 
             //act
-            var result = mocRepo.Object.GetByID(CustomerSupplierConsts.SupplierId);
+            var result = mockRepo.Object.GetByID(CustomerSupplierConsts.SupplierId);
 
             //asert
             Assert.Equal(CustomerSupplierConsts.SupplierCompanyName, result.Companyname);
@@ -50,12 +54,11 @@ namespace MyStore.Tests
         public void Shoul_Return_Supplier_On_Post()
         {
             //arrange
-            var mocRepo = new Mock<ISupplierRepository>();
-            mocRepo.Setup(repo => repo.AddSupplier(It.IsAny<Supplier>()))
+            mockRepo.Setup(repo => repo.AddSupplier(It.IsAny<Supplier>()))
                 .Returns(ReturnOneSupplier(CustomerSupplierConsts.SupplierId));
 
             //act
-            var result = mocRepo.Object.AddSupplier(ReturnOneSupplier(CustomerSupplierConsts.SupplierId));
+            var result = mockRepo.Object.AddSupplier(ReturnOneSupplier(CustomerSupplierConsts.SupplierId));
 
             //asert
             Assert.Equal(CustomerSupplierConsts.SupplierCompanyName, result.Companyname);
@@ -67,12 +70,11 @@ namespace MyStore.Tests
         public void ShouldReturn_Supplier_On_Put()
         {
             //arrange
-            var mocRepo = new Mock<ISupplierRepository>();
-            mocRepo.Setup(repo => repo.Update(It.IsAny<Supplier>()))
+            mockRepo.Setup(repo => repo.Update(It.IsAny<Supplier>()))
                 .Returns(ReturnOneSupplier(CustomerSupplierConsts.SupplierId));
 
             //act
-            var result = mocRepo.Object.Update(ReturnOneSupplier(CustomerSupplierConsts.SupplierId));
+            var result = mockRepo.Object.Update(ReturnOneSupplier(CustomerSupplierConsts.SupplierId));
 
             //asert
             Assert.Equal(CustomerSupplierConsts.SupplierCompanyName, result.Companyname);
@@ -84,12 +86,11 @@ namespace MyStore.Tests
         public void Shoul_Return_True_On_Delete()
         {
             //arrange
-            var mocRepo = new Mock<ISupplierRepository>();
-            mocRepo.Setup(repo => repo.Delete(It.IsAny<Supplier>()))
+            mockRepo.Setup(repo => repo.Delete(It.IsAny<Supplier>()))
                 .Returns(true);
 
             //act
-            var result = mocRepo.Object.Delete(ReturnOneSupplier(CustomerSupplierConsts.SupplierId));
+            var result = mockRepo.Object.Delete(ReturnOneSupplier(CustomerSupplierConsts.SupplierId));
 
             //asert
             Assert.True(result);

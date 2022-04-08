@@ -13,7 +13,7 @@ namespace MyStore.Tests
 {
     public class ProductModelTests
     {
-        public const string ProductNameRequiredMessage = "Product name is required";
+        public const string ProductNameRequiredMessage = "Product name is required!";
         public const int ValidCategoryId = 2;
 
         //[Fact]

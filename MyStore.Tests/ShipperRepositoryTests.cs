@@ -12,16 +12,21 @@ namespace MyStore.Tests
 {
     public class ShipperRepositoryTests
     {
+        private Mock<IShipperRepository> mockRepo;
+        public ShipperRepositoryTests()
+        {
+            mockRepo = new Mock<IShipperRepository>();
+        }
+
         [Fact]
         public void Should_GetAllShippers()
         {
             //arrange
-            var mocRepo = new Mock<IShipperRepository>();
-            mocRepo.Setup(repo => repo.GetAll())
+            mockRepo.Setup(repo => repo.GetAll())
                 .Returns(ReturnMultiple());
 
             //act
-            var result = mocRepo.Object.GetAll();
+            var result = mockRepo.Object.GetAll();
 
             //asert
             Assert.Equal(2, result.Count());
@@ -33,12 +38,11 @@ namespace MyStore.Tests
         public void Should_GetOneShipper()
         {
             //arrange
-            var mocRepo = new Mock<IShipperRepository>();
-            mocRepo.Setup(repo => repo.GetByID(ShipperConsts.ShipperId))
+            mockRepo.Setup(repo => repo.GetByID(ShipperConsts.ShipperId))
                 .Returns(ReturnOneShipper(ShipperConsts.ShipperId));
 
             //act
-            var result = mocRepo.Object.GetByID(ShipperConsts.ShipperId);
+            var result = mockRepo.Object.GetByID(ShipperConsts.ShipperId);
 
             //asert
             Assert.Equal(ShipperConsts.ShipperId, result.Shipperid);
@@ -50,12 +54,11 @@ namespace MyStore.Tests
         public void Shoul_Return_Shipper_On_Post()
         {
             //arrange
-            var mocRepo = new Mock<IShipperRepository>();
-            mocRepo.Setup(repo => repo.Add(It.IsAny<Shipper>()))
+            mockRepo.Setup(repo => repo.Add(It.IsAny<Shipper>()))
                 .Returns(ReturnOneShipper(ShipperConsts.ShipperId));
 
             //act
-            var result = mocRepo.Object.Add(ReturnOneShipper(ShipperConsts.ShipperId));
+            var result = mockRepo.Object.Add(ReturnOneShipper(ShipperConsts.ShipperId));
 
             //asert
             Assert.Equal(ShipperConsts.ShipperCompanyName, result.Companyname);
@@ -67,12 +70,11 @@ namespace MyStore.Tests
         public void ShouldReturn_Shipper_On_Put()
         {
             //arrange
-            var mocRepo = new Mock<IShipperRepository>();
-            mocRepo.Setup(repo => repo.Update(It.IsAny<Shipper>()))
+            mockRepo.Setup(repo => repo.Update(It.IsAny<Shipper>()))
                 .Returns(ReturnOneShipper(ShipperConsts.ShipperId));
 
             //act
-            var result = mocRepo.Object.Update(ReturnOneShipper(ShipperConsts.ShipperId));
+            var result = mockRepo.Object.Update(ReturnOneShipper(ShipperConsts.ShipperId));
 
             //asert
             Assert.Equal(ShipperConsts.ShipperCompanyName, result.Companyname);
@@ -84,12 +86,11 @@ namespace MyStore.Tests
         public void Shoul_Return_True_On_Delete()
         {
             //arrange
-            var mocRepo = new Mock<IShipperRepository>();
-            mocRepo.Setup(repo => repo.Delete(It.IsAny<Shipper>()))
+            mockRepo.Setup(repo => repo.Delete(It.IsAny<Shipper>()))
                 .Returns(true);
 
             //act
-            var result = mocRepo.Object.Delete(ReturnOneShipper(CategoryConsts.Categoryid));
+            var result = mockRepo.Object.Delete(ReturnOneShipper(CategoryConsts.Categoryid));
 
             //asert
             Assert.True(result);
@@ -102,7 +103,7 @@ namespace MyStore.Tests
             IEnumerable<Shipper> shippers = ReturnMultiple();
             return shippers.Where(x => x.Shipperid == i).FirstOrDefault();
         }
-        private List<Shipper> ReturnMultiple()
+        private static List<Shipper> ReturnMultiple()
         {
             return new List<Shipper>()
                  {

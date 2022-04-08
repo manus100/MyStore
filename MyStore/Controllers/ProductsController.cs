@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyStore.Domain.Entities;
+using MyStore.Infrastructure.Attributes;
 using MyStore.Models;
 using MyStore.Services;
 
@@ -26,6 +27,8 @@ namespace MyStore.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
+        [ResponseHeader("AwesomeHeader", "From Web API Filter")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<ProductModel>> Get()
         {
             //string[] games = {"Morrowind", "BioShock", "Daxter",
@@ -46,6 +49,8 @@ namespace MyStore.Controllers
 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<ProductModel> Get(int id)
         {
             var result = productService.GetByID(id);
@@ -54,8 +59,11 @@ namespace MyStore.Controllers
             return Ok(result);
         }
 
+
         // POST api/<ProductsController>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<ProductModel> Post([FromBody] ProductModel newProduct)
         {
             if (!ModelState.IsValid)  //fail fast -> return
@@ -63,8 +71,6 @@ namespace MyStore.Controllers
                 return BadRequest();
             }
 
-            //var addedProduct = new Product();
-            //'productService.Add
             var addedProduct=productService.AddProduct(newProduct);
 
             return CreatedAtAction("Get", new { id = addedProduct.Productid }, addedProduct);
@@ -73,9 +79,11 @@ namespace MyStore.Controllers
 
         // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK,Type = typeof(ProductModel))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-       // [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        // [Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<ProductModel> Put(int id, [FromBody] ProductModel productToUpdate)
         {
             //exist by id or not-> validation
@@ -104,7 +112,9 @@ namespace MyStore.Controllers
 
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(ProductModel))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]   //, Type = typeof(ProductModel) nu e cazul ca nu returnez nimic
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         public IActionResult Delete(int id)
         {
             if (!productService.Exists(id))

@@ -15,6 +15,7 @@ namespace MyStore.Tests
         public const int Product1Id = 1;
         public const int Product2Id = 2;
         public const int Product3Id = 3;
+        public const int NonExistingProductID = 100;
         public static decimal UnitPriceTest = 100.23M;
         public const string ProductName1 = "Product test 1";
         public const string ProductName2 = "Product test 2";

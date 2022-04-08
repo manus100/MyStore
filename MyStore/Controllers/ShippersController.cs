@@ -13,11 +13,11 @@ namespace MyStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ShipperController : ControllerBase
+    public class ShippersController : ControllerBase
     {
         private readonly IShipperService shipperService;
 
-        public ShipperController(IShipperService shipperService)
+        public ShippersController(IShipperService shipperService)
         {
             this.shipperService = shipperService;
         }

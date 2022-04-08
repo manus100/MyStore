@@ -39,6 +39,13 @@ namespace MyStore.Controllers
                 return Ok(result);
         }
 
+        //Attribute routing - Get orders for a customer
+        //[Route("customers/{customerId}/orders")]
+        //public IEnumerable<Order> GetOrdersByCustomer(int customerId) 
+        //{ 
+
+        //}
+
         // POST api/<CustomersController>
         [HttpPost]
         public IActionResult Post([FromBody] CustomerModel newCustomer)

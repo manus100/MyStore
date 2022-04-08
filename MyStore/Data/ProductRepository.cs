@@ -9,20 +9,18 @@ namespace MyStore.Data
 {
     public interface IProductRepository
     {
+        //data access code
+        //apeluri de metode care se ocupa de CRUD + data retrieval
         Product Add(Product newProduct);
         bool Delete(Product productToDelete);
         bool Exists(int id);
-
-        //data access code
-        //metode care se ocupa de CRUD + data retrieval
-
         IEnumerable<Product> GetAll();
         Product GetByID(int id);
         bool HasOrders(int id);
         Product Update(Product productToUpdate);
         // IEnumerable GetProductCategory();
     }
-    public class ProductRepository : IProductRepository       //clasa care se ocupa cu accesul la date
+    public class ProductRepository : IProductRepository       //clasa care se ocupa cu accesul la baza de date
     {
         private readonly StoreContext context;
 
@@ -40,12 +38,12 @@ namespace MyStore.Data
         {
             return context.Products.Where(x => x.Categoryid == categoryID).ToList();
 
-            //Where returneaza un IQueryable care te lasa sa filtrezi un sir de date pana cand fac ToList(); cd fac ToList /Select codul ajunge la bd
+            //Where returneaza un IQueryable care te lasa sa filtrezi in memorie un sir de date pana cand fac ToList(); cd fac ToList /Select codul generat de EF
+            //ajunge la bd
         }
 
         public Product GetByID(int id)
         {
-            //return context.Products.Where(x => x.Productid == id);  //nu merge
           // return context.Products.Find(id);
             return context.Products.FirstOrDefault(x => x.Productid == id);
 

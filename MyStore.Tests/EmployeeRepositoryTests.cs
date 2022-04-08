@@ -12,16 +12,21 @@ namespace MyStore.Tests
 {
     public class EmployeeRepositoryTests
     {
+        private Mock<IEmployeeRepository> mockRepo;
+        public EmployeeRepositoryTests()
+        {
+            mockRepo = new Mock<IEmployeeRepository>();
+        }
+
         [Fact]
         public void Should_GetAllEmployees()
         {
             //arrange
-            var mocRepo = new Mock<IEmployeeRepository>();
-            mocRepo.Setup(repo => repo.GetAll())
+            mockRepo.Setup(repo => repo.GetAll())
                 .Returns(ReturnMultiple());
 
             //act
-            var result = mocRepo.Object.GetAll();
+            var result = mockRepo.Object.GetAll();
 
             //asert
             Assert.Equal(2, result.Count());
@@ -33,12 +38,11 @@ namespace MyStore.Tests
         public void Should_GetOneEmployee()
         {
             //arrange
-            var mocRepo = new Mock<IEmployeeRepository>();
-            mocRepo.Setup(repo => repo.GetByID(EmployeeConsts.EmpId))
+            mockRepo.Setup(repo => repo.GetByID(EmployeeConsts.EmpId))
                 .Returns(ReturnOneEmployee(EmployeeConsts.EmpId));
 
             //act
-            var result = mocRepo.Object.GetByID(EmployeeConsts.EmpId);
+            var result = mockRepo.Object.GetByID(EmployeeConsts.EmpId);
 
             //asert
             Assert.Equal(EmployeeConsts.EmpId, result.Empid);
@@ -50,12 +54,11 @@ namespace MyStore.Tests
         public void Shoul_Return_Employee_On_Post()
         {
             //arrange
-            var mocRepo = new Mock<IEmployeeRepository>();
-            mocRepo.Setup(repo => repo.Add(It.IsAny<Employee>()))
+            mockRepo.Setup(repo => repo.Add(It.IsAny<Employee>()))
                 .Returns(ReturnOneEmployee(EmployeeConsts.EmpId));
 
             //act
-            var result = mocRepo.Object.Add(ReturnOneEmployee(EmployeeConsts.EmpId));
+            var result = mockRepo.Object.Add(ReturnOneEmployee(EmployeeConsts.EmpId));
 
             //asert
             Assert.Equal(EmployeeConsts.FirstName1, result.Firstname);
@@ -67,12 +70,11 @@ namespace MyStore.Tests
         public void ShouldReturn_Employee_On_Put()
         {
             //arrange
-            var mocRepo = new Mock<IEmployeeRepository>();
-            mocRepo.Setup(repo => repo.Update(It.IsAny<Employee>()))
+            mockRepo.Setup(repo => repo.Update(It.IsAny<Employee>()))
                 .Returns(ReturnOneEmployee(EmployeeConsts.EmpId));
 
             //act
-            var result = mocRepo.Object.Update(ReturnOneEmployee(EmployeeConsts.EmpId));
+            var result = mockRepo.Object.Update(ReturnOneEmployee(EmployeeConsts.EmpId));
 
             //asert
             Assert.Equal(EmployeeConsts.FirstName1, result.Firstname);
@@ -84,12 +86,11 @@ namespace MyStore.Tests
         public void Shoul_Return_True_On_Delete()
         {
             //arrange
-            var mocRepo = new Mock<IEmployeeRepository>();
-            mocRepo.Setup(repo => repo.Delete(It.IsAny<Employee>()))
+            mockRepo.Setup(repo => repo.Delete(It.IsAny<Employee>()))
                 .Returns(true);
 
             //act
-            var result = mocRepo.Object.Delete(ReturnOneEmployee(EmployeeConsts.EmpId));
+            var result = mockRepo.Object.Delete(ReturnOneEmployee(EmployeeConsts.EmpId));
 
             //asert
             Assert.True(result);

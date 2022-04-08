@@ -29,8 +29,10 @@ namespace MyStore.Models
         [RegularExpression("Mr.|Mrs.|Ms.|Dr.|Miss|Sir|Madam", ErrorMessage = "The title of courtesy must be one of the values: 'Mr.', 'Mrs.', 'Ms.','Dr.','Miss','Sir' or 'Madam' ")]
         public string Titleofcourtesy { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime Birthdate { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime Hiredate { get; set; }
         [Required]
         [StringLength(60, ErrorMessage = "Address field cannot exceed 60 characters!")]

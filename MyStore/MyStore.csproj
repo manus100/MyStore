@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\ProductCategoryController.cs" />
+    <Compile Remove="Domain\Entities\Test.cs" />
   </ItemGroup>
 
   <ItemGroup>

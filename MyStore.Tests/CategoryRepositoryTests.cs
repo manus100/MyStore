@@ -13,18 +13,21 @@ namespace MyStore.Tests
 {
     public class CategoryRepositoryTests
     {
+        private Mock<ICategoryRepository> mockRepo;
+        public CategoryRepositoryTests()
+        {
+            mockRepo = new Mock<ICategoryRepository>();
+        }
 
-   
         [Fact]
         public void Should_GetAllCategories()
         {
             //arrange
-            var mocRepo = new Mock<ICategoryRepository>();
-            mocRepo.Setup(repo => repo.GetAll())
+            mockRepo.Setup(repo => repo.GetAll())
                 .Returns(ReturnMultiple());
 
             //act
-            var result = mocRepo.Object.GetAll();
+            var result = mockRepo.Object.GetAll();
 
             //asert
             Assert.Equal(2, result.Count());
@@ -36,12 +39,11 @@ namespace MyStore.Tests
         public void Should_GetOneCategory()
         {
             //arrange
-            var mocRepo = new Mock<ICategoryRepository>();
-            mocRepo.Setup(repo => repo.GetByID(CategoryConsts.Categoryid))
+            mockRepo.Setup(repo => repo.GetByID(CategoryConsts.Categoryid))
                 .Returns(ReturnOneCategory(CategoryConsts.Categoryid));
 
             //act
-            var result = mocRepo.Object.GetByID(CategoryConsts.Categoryid);
+            var result = mockRepo.Object.GetByID(CategoryConsts.Categoryid);
 
             //asert
             Assert.Equal(CategoryConsts.Categoryid, result.Categoryid);
@@ -53,12 +55,11 @@ namespace MyStore.Tests
         public void Shoul_Return_Category_On_Post()
         {
             //arrange
-            var mocRepo = new Mock<ICategoryRepository>();
-            mocRepo.Setup(repo => repo.Add(It.IsAny<Category>()))
+            mockRepo.Setup(repo => repo.Add(It.IsAny<Category>()))
                 .Returns(ReturnOneCategory(CategoryConsts.Categoryid));
 
             //act
-            var result = mocRepo.Object.Add(ReturnOneCategory(CategoryConsts.Categoryid));
+            var result = mockRepo.Object.Add(ReturnOneCategory(CategoryConsts.Categoryid));
 
             //asert
             Assert.Equal(CategoryConsts.Categoryname, result.Categoryname);
@@ -70,12 +71,11 @@ namespace MyStore.Tests
         public void ShouldReturn_Category_On_Put()
         {
             //arrange
-            var mocRepo = new Mock<ICategoryRepository>();
-            mocRepo.Setup(repo => repo.Update(It.IsAny<Category>()))
+            mockRepo.Setup(repo => repo.Update(It.IsAny<Category>()))
                 .Returns(ReturnOneCategory(CategoryConsts.Categoryid));
 
             //act
-            var result = mocRepo.Object.Update(ReturnOneCategory(CategoryConsts.Categoryid));
+            var result = mockRepo.Object.Update(ReturnOneCategory(CategoryConsts.Categoryid));
 
             //asert
             Assert.Equal(CategoryConsts.Categoryname, result.Categoryname);
@@ -87,12 +87,11 @@ namespace MyStore.Tests
         public void Shoul_Return_True_On_Delete()
         {
             //arrange
-            var mocRepo = new Mock<ICategoryRepository>();
-            mocRepo.Setup(repo => repo.Delete(It.IsAny<Category>()))
+            mockRepo.Setup(repo => repo.Delete(It.IsAny<Category>()))
                 .Returns(true);
 
             //act
-            var result = mocRepo.Object.Delete(ReturnOneCategory(CategoryConsts.Categoryid));
+            var result = mockRepo.Object.Delete(ReturnOneCategory(CategoryConsts.Categoryid));
 
             //asert
            Assert.True(result);

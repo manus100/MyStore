@@ -12,16 +12,16 @@ namespace MyStore.Tests
 {
     public class ProductRepositoryTests
     {
+        private readonly Mock<IProductRepository> mockRepo;
         public ProductRepositoryTests()
         {
-
-        } 
+            mockRepo = new Mock<IProductRepository>();
+        }
 
         [Fact]
         public void Should_GetAllProducts()
         {
             //arrange
-            var mockRepo = new Mock<IProductRepository>();
             mockRepo.Setup(repo => repo.GetAll())    //setup => ii zic ce sa returneze si din ce
                     .Returns(ReturnMultiple());
 
@@ -39,12 +39,11 @@ namespace MyStore.Tests
         public void Should_GetOneProduct()
         {
             //arrange
-            var mocRepo = new Mock<IProductRepository>();
-            mocRepo.Setup(repo => repo.GetByID(ProductConsts.Product1Id))
+            mockRepo.Setup(repo => repo.GetByID(ProductConsts.Product1Id))
                 .Returns(ReturnOneProduct(ProductConsts.Product1Id));
 
             //act
-            var result = mocRepo.Object.GetByID(ProductConsts.Product1Id);
+            var result = mockRepo.Object.GetByID(ProductConsts.Product1Id);
 
             //asert
             Assert.Equal(ProductConsts.Product1Id, result.Productid);
@@ -56,12 +55,11 @@ namespace MyStore.Tests
         public void Shoul_Return_Product_On_Post()
         {
             //arrange
-            var mocRepo = new Mock<IProductRepository>();
-            mocRepo.Setup(repo => repo.Add(It.IsAny<Product>()))
+            mockRepo.Setup(repo => repo.Add(It.IsAny<Product>()))
                 .Returns(ReturnOneProduct(ProductConsts.Product1Id));
 
             //act
-            var result = mocRepo.Object.Add(ReturnOneProduct(ProductConsts.Product1Id));
+            var result = mockRepo.Object.Add(ReturnOneProduct(ProductConsts.Product1Id));
 
             //asert
             Assert.Equal(ProductConsts.ProductName1, result.Productname);
@@ -73,12 +71,11 @@ namespace MyStore.Tests
         public void ShouldReturn_Product_On_Put()
         {
             //arrange
-            var mocRepo = new Mock<IProductRepository>();
-            mocRepo.Setup(repo => repo.Update(It.IsAny<Product>()))
+            mockRepo.Setup(repo => repo.Update(It.IsAny<Product>()))
                 .Returns(ReturnOneProduct(ProductConsts.Product1Id));
 
             //act
-            var result = mocRepo.Object.Update(ReturnOneProduct(ProductConsts.Product1Id));
+            var result = mockRepo.Object.Update(ReturnOneProduct(ProductConsts.Product1Id));
 
             //asert
             Assert.Equal(ProductConsts.ProductName1, result.Productname);
@@ -89,12 +86,11 @@ namespace MyStore.Tests
         public void Shoul_Return_True_On_Delete()
         {
             //arrange
-            var mocRepo = new Mock<IProductRepository>();
-            mocRepo.Setup(repo => repo.Delete(It.IsAny<Product>()))
+            mockRepo.Setup(repo => repo.Delete(It.IsAny<Product>()))
                 .Returns(true);
 
             //act
-            var result = mocRepo.Object.Delete(ReturnOneProduct(ProductConsts.Product1Id));
+            var result = mockRepo.Object.Delete(ReturnOneProduct(ProductConsts.Product1Id));
 
             //asert
             Assert.True(result);
@@ -107,7 +103,7 @@ namespace MyStore.Tests
             return products.Where(x => x.Productid == i).FirstOrDefault();
         }
 
-        private List<Product> ReturnMultiple()
+        private static List<Product> ReturnMultiple()
         {
             return new List<Product>()
             {

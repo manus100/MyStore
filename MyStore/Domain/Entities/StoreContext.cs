@@ -12,7 +12,7 @@ namespace MyStore.Domain.Entities
         {
         }
 
-        public StoreContext(DbContextOptions<StoreContext> options)
+        public StoreContext(DbContextOptions<StoreContext> options)  //--> dependency inversion
             : base(options)
         {
         }
@@ -27,7 +27,7 @@ namespace MyStore.Domain.Entities
         public virtual DbSet<Score> Scores { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<Test> Tests { get; set; }
+       
 
         // apare in appsetting la ConnectionStrings
         //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -42,7 +42,7 @@ namespace MyStore.Domain.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
+            //fluent API; dc puneam in commanda --data-annotation imi facea cu data annotation
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.HasIndex(e => e.Categoryname, "idx_nc_categoryname");
@@ -382,11 +382,7 @@ namespace MyStore.Domain.Entities
 
                 entity.Property(e => e.Score1).HasColumnName("score");
 
-                entity.HasOne(d => d.Test)
-                    .WithMany(p => p.Scores)
-                    .HasForeignKey(d => d.Testid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Scores_Tests");
+              
             });
 
             modelBuilder.Entity<Shipper>(entity =>
@@ -459,16 +455,6 @@ namespace MyStore.Domain.Entities
                     .HasMaxLength(15)
                     .HasColumnName("region");
             });
-
-            modelBuilder.Entity<Test>(entity =>
-            {
-                entity.Property(e => e.Testid)
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("testid");
-            });
-
-
 
             OnModelCreatingPartial(modelBuilder);
         }
