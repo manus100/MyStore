@@ -26,7 +26,7 @@ namespace MyStore.Tests
         {
             //arrange
             mockProductService.Setup(x => x.GetAllProducts())
-                .Returns(new List<ProductModel> { new ProductModel() { } });
+                .Returns(MultipleProducts());
 
             var controller = new ProductsController(mockProductService.Object);
 
