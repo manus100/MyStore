@@ -94,7 +94,7 @@ namespace MyStore
 
             app.UseAuthorization();
 
-            app.UseMiddleware<SecurityHeaderMiddleware>();
+         //   app.UseMiddleware<SecurityHeaderMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

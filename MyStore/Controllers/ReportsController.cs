@@ -30,6 +30,8 @@ namespace MyStore.Controllers
 
         // GET: api/<ReportsController>
         [HttpGet("/contacts")]  
+        //[HttpGet]
+        //[Route("/contacts")]
         public ActionResult<List<CustomerContact>> GetCustomersContacts()
         {
             var contacts = reportsService.GetContacts();
